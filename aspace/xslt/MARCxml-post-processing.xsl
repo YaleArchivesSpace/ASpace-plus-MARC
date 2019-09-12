@@ -124,4 +124,43 @@
         </xsl:copy>
     </xsl:template>
     
+    <!-- refactor after the full requirements are gathered -->
+    <xsl:template match="marc:datafield[@tag eq '506'][marc:subfield[@code eq 'a'][matches(., '\n\n')]]">
+        <xsl:copy>
+            <xsl:apply-templates select="@* except @ind1"/>
+            <xsl:attribute name="ind1" select="if (tokenize(marc:subfield[@code eq 'a'], '\n\n')[1] => lower-case() => contains('restricted')) then '1' else '0'"/>
+            <xsl:for-each select="tokenize(marc:subfield[@code eq 'a'], '\n\n')[1]">
+                <xsl:element name="subfield" namespace="http://www.loc.gov/MARC21/slim">
+                    <xsl:attribute name="code" select="'a'"/>
+                    <xsl:value-of select="."/>
+                </xsl:element>
+            </xsl:for-each>
+        </xsl:copy>
+        <xsl:for-each select="tokenize(marc:subfield[@code eq 'a'], '\n\n')[position() gt 1]">
+            <xsl:call-template name="multi-paragraph">
+                <xsl:with-param name="node" select="."/>
+            </xsl:call-template>
+        </xsl:for-each>
+    </xsl:template>
+    
+    <xsl:template name="multi-paragraph">
+        <xsl:param name="node"/>
+        <xsl:element name="datafield" namespace="http://www.loc.gov/MARC21/slim">
+            <xsl:attribute name="tag" select="'506'"/>
+            <xsl:attribute name="ind1" select="if (contains(lower-case($node), 'restricted')) then '1' else '0'"/>
+            <xsl:attribute name="ind2" select="' '"/>
+            <xsl:element name="subfield" namespace="http://www.loc.gov/MARC21/slim">
+                <xsl:attribute name="code" select="'a'"/>
+                <xsl:value-of select="$node"/>
+            </xsl:element>
+        </xsl:element>
+    </xsl:template>
+    
+    <xsl:template match="marc:subfield[@code eq '2'][starts-with(., 'local_')]">
+        <xsl:copy>
+            <xsl:apply-templates select="@*"/>
+            <xsl:text>local</xsl:text>
+        </xsl:copy>
+    </xsl:template>
+    
 </xsl:stylesheet>
