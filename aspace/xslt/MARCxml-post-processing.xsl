@@ -103,6 +103,14 @@
     
     <xsl:template match="marc:datafield[@tag = ('044', '049', '099')]"/>
     
+    <xsl:template match="marc:datafield[@tag eq '300']/marc:subfield[@code eq 'f']">
+        <xsl:copy>
+            <xsl:apply-templates select="@*"/>
+            <!-- do a better job for replacing these values, but this should work for now -->
+            <xsl:value-of select="translate(., 'Linear Feet', 'linear feet') => replace('\(\(', '(') => replace('\)\)', ')')"/>
+        </xsl:copy>
+    </xsl:template>
+    
     <!-- still have to address 100 - 7xx -->
     
     <xsl:template match="marc:datafield[@tag eq '852']">
