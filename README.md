@@ -10,7 +10,7 @@ First of all, everything here is still a work in progress! But the general idea 
 Right now, both of these use cases share the same requirements, although in the future we plan to further abstract and automate both workflows.  For now, the requirements are:
 
 * Windows, since both workflows use simple batch commands to control the transformation steps.
-* Java 6 (or higher), since both workflows utilize SaxonHE to run the XML transformations.
+* Java 8 (or higher), since both workflows utilize SaxonHE to run the XML transformations.
 * MarcEdit, since both workflows run MarcEdit from the commandline to convert (and combine) MARCXML records into binary MARC files.
 
 For more information about the current setup process, see https://docs.google.com/document/d/189W6dSrjhmmDly6woaxEKZCwVZXhmpIVbFnlCcuEkE4/edit?usp=sharing 
