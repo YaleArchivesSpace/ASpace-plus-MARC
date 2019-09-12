@@ -1,4 +1,6 @@
 *.py
 __pycache__/
-aspace\export\backups
-excel\spreadsheets\backups
+aspace/export/backups
+aspace/import
+excel/spreadsheets/backups
+excel/import
