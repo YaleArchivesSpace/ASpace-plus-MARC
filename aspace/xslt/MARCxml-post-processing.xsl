@@ -38,8 +38,6 @@
     
     <xsl:param name="default-language-of-cataloging" select="'eng'"/>
     
-    <xsl:variable name="eadid" select="marc:collection/marc:record[1]/marc:datafield[@tag eq '856']/marc:subfield[@code eq 'u']/substring-after(., 'http://hdl.handle.net/10079/fa/')"/>
-    
     <!-- as usual, the standard identity template -->
     <xsl:template match="@*|node()">
         <xsl:copy>
@@ -73,13 +71,14 @@
             <xsl:apply-templates select="@*"/>
             <xsl:value-of select="substring(., 1, 15) || $place-of-publication || substring(., 19)"/>
         </xsl:copy>
-        <xsl:if test="$eadid">
-            <datafield ind1=" " ind2=" " tag="035">
-                <subfield code="9">
-                    <xsl:value-of select="'YUL(ead).' || $eadid"/>
-                </subfield>
-            </datafield>
-        </xsl:if>
+    </xsl:template>
+
+    <!-- here's where we grab the EAD ID (which should be on the only 035 $9 in the export) and prepend it with YUL(ead). -->
+    <xsl:template match="marc:datafield[@tag eq '035']/marc:subfield[@code eq '9'][not(matches(., '^YUL\(ead\)'))]">
+        <xsl:copy>
+            <xsl:apply-templates select="@*"/>
+            <xsl:value-of select="'YUL(ead).' || ."/>
+        </xsl:copy>
     </xsl:template>
     
     <!-- should update the repo records in ASpace not to include "US-" in the agency code, but we'll also scrub this after the export process -->
@@ -102,6 +101,9 @@
     <xsl:template match="marc:datafield[@tag eq '041']/marc:subfield[@code eq '2']"/>
     
     <xsl:template match="marc:datafield[@tag = ('044', '049', '099')]"/>
+    
+    <!-- until we hear from CMS about how to create the MFHDs and Item records, we will filter those out -->
+    <xsl:template match="marc:datafield[@tag = ('863', '949')]"/>
     
     <xsl:template match="marc:datafield[@tag eq '300']/marc:subfield[@code eq 'f']">
         <xsl:copy>
