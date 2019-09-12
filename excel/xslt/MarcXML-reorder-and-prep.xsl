@@ -62,7 +62,7 @@
         </xsl:copy>
     </xsl:template>
     
-    <!-- any other values to add deafults for is missing? -->
+    <!-- any other values to add defaults for is missing? -->
     <xsl:template match="marc:datafield[@tag='655'][not(marc:subfield/@code='2')]">
         <xsl:variable name="source" select="if (lower-case(.) = 'manuscript maps') then 'lcgft' else 'aat'"/>
         <xsl:copy>
