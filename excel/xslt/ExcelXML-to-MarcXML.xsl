@@ -121,6 +121,7 @@
         <xsl:variable name="_1xx_0" select="ss:Cell[ss:Data[normalize-space()]][ss:NamedCell/@ss:Name = '_1xx_0']"/>
         <xsl:variable name="title" select="ss:Cell[ss:Data[normalize-space()]][ss:NamedCell/@ss:Name = 'Title_245']"/> 
         <xsl:variable name="material_type" select="ss:Cell[ss:Data[normalize-space()]][ss:NamedCell/@ss:Name = 'Material_type_245']"/>
+        <xsl:variable name="title_statement" select="ss:Cell[ss:Data[normalize-space()]][ss:NamedCell/@ss:Name = 'Statement_245']"/>
         <xsl:variable name="Date_of_Creation" select="ss:Cell[ss:Data[normalize-space()]][ss:NamedCell/@ss:Name = 'Date_of_Creation']"/>
         <xsl:variable name="Date_one_008" select="ss:Cell[ss:Data[normalize-space()]][ss:NamedCell/@ss:Name = 'Date_one_008']"/>
         <xsl:variable name="Date_two_008" select="ss:Cell[ss:Data[normalize-space()]][ss:NamedCell/@ss:Name = 'Date_two_008']"/>
@@ -194,6 +195,7 @@
                 <xsl:with-param name="ind1" select="if ($Creator_1xx) then '1' else '0'"/>
                 <xsl:with-param name="dacs_date" select="if ($rules eq 'dacs') then $Date_of_Creation else 0"/>
                 <xsl:with-param name="material_type" select="$material_type"/>
+                <xsl:with-param name="title_statement" select="$title_statement"/>
             </xsl:call-template>
             <xsl:if test="$rules = ('dcrmmss', 'dcrmg', 'dcrmc')">
                 <xsl:call-template name="publication_264">
@@ -462,6 +464,7 @@
         <xsl:param name="title"/>
         <xsl:param name="dacs_date"/>
         <xsl:param name="material_type"/>
+        <xsl:param name="title_statement"/>
         <marc:datafield tag="245">
             <xsl:attribute name="ind1" select="$ind1"/>
             <!-- how to get the number of non-filing characters??? use a map/list? -->
@@ -487,10 +490,14 @@
             </xsl:if>
             <xsl:if test="$material_type">
                 <!-- sample:
-                    : $k printout. 
+                    "printout"
                     (in the Deal-with-ISBD-issues section will make sure to have the 'space colon space' separator)
+                    will also need to either add a terminal period, if the last subfield, or something else if not.
                 -->
-                <xsl:sequence select="mdc:create-marc-subfield(substring(normalize-space($material_type), 4, 1), substring(normalize-space($material_type), 6))"/>
+                <xsl:sequence select="mdc:create-marc-subfield('k', normalize-space($material_type))"/>
+            </xsl:if>
+            <xsl:if test="$title_statement">
+                <xsl:sequence select="mdc:create-marc-subfield('c', normalize-space($title_statement))"/>
             </xsl:if>
         </marc:datafield>
     </xsl:template>

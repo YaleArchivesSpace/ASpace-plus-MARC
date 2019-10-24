@@ -463,58 +463,59 @@
             <NamedRange ss:Name="_1xx" ss:RefersTo="='Cataloging Worksheet'!C6"/>
             <NamedRange ss:Name="_1xx_0" ss:RefersTo="='Cataloging Worksheet'!C9"/>
             <NamedRange ss:Name="_1xx_e" ss:RefersTo="='Cataloging Worksheet'!C8"/>
-            <NamedRange ss:Name="Access_Restrictions_506" ss:RefersTo="='Cataloging Worksheet'!C24"/>
+            <NamedRange ss:Name="Access_Restrictions_506" ss:RefersTo="='Cataloging Worksheet'!C25"/>
             <NamedRange ss:Name="Accession_number" ss:RefersTo="='Cataloging Worksheet'!C1"/>
-            <NamedRange ss:Name="Accession_Type_561" ss:RefersTo="='Cataloging Worksheet'!C32"/>
+            <NamedRange ss:Name="Accession_Type_561" ss:RefersTo="='Cataloging Worksheet'!C33"/>
             <NamedRange ss:Name="acquisition_list" ss:RefersTo="='Controlled Values'!R2C7:R5C7"/>
-            <NamedRange ss:Name="Additional_Extent_300" ss:RefersTo="='Cataloging Worksheet'!C18"/>
-            <NamedRange ss:Name="Additional_MARC_Fields" ss:RefersTo="='Cataloging Worksheet'!C40"/>
-            <NamedRange ss:Name="Arrangement_351" ss:RefersTo="='Cataloging Worksheet'!C23"/>
+            <NamedRange ss:Name="Additional_Extent_300" ss:RefersTo="='Cataloging Worksheet'!C19"/>
+            <NamedRange ss:Name="Additional_MARC_Fields" ss:RefersTo="='Cataloging Worksheet'!C41"/>
+            <NamedRange ss:Name="Arrangement_351" ss:RefersTo="='Cataloging Worksheet'!C24"/>
             <NamedRange ss:Name="bib_level_list" ss:RefersTo="='Controlled Values'!R2C13:R3C13"/>
             <NamedRange ss:Name="Bibliographic_level" ss:RefersTo="='Cataloging Worksheet'!C4"/>
-            <NamedRange ss:Name="Biographical_Note_545" ss:RefersTo="='Cataloging Worksheet'!C25"/>
+            <NamedRange ss:Name="Biographical_Note_545" ss:RefersTo="='Cataloging Worksheet'!C26"/>
             <NamedRange ss:Name="call_number_list" ss:RefersTo="='Controlled Values'!R2C1:R6C1"/>
             <NamedRange ss:Name="Call_number_sequence" ss:RefersTo="='Cataloging Worksheet'!C2"/>
             <NamedRange ss:Name="carrier_list" ss:RefersTo="='Controlled Values'!R2C5:R5C5"/>
-            <NamedRange ss:Name="Carrier_Type_338" ss:RefersTo="='Cataloging Worksheet'!C22"/>
+            <NamedRange ss:Name="Carrier_Type_338" ss:RefersTo="='Cataloging Worksheet'!C23"/>
             <NamedRange ss:Name="Cataloging_Source_040_e" ss:RefersTo="='Cataloging Worksheet'!C5"/>
             <NamedRange ss:Name="content_list" ss:RefersTo="='Controlled Values'!R2C4:R5C4"/>
-            <NamedRange ss:Name="Content_Type_336" ss:RefersTo="='Cataloging Worksheet'!C21"/>
+            <NamedRange ss:Name="Content_Type_336" ss:RefersTo="='Cataloging Worksheet'!C22"/>
             <NamedRange ss:Name="Creator_1xx" ss:RefersTo="='Cataloging Worksheet'!C7"/>
             <NamedRange ss:Name="curatorial_list" ss:RefersTo="='Controlled Values'!R2C8:R7C8"/>
-            <NamedRange ss:Name="Date_of_Creation" ss:RefersTo="='Cataloging Worksheet'!C12"/>
-            <NamedRange ss:Name="Date_one_008" ss:RefersTo="='Cataloging Worksheet'!C13"/>
-            <NamedRange ss:Name="Date_two_008" ss:RefersTo="='Cataloging Worksheet'!C14"/>
-            <NamedRange ss:Name="Extent_300" ss:RefersTo="='Cataloging Worksheet'!C17"/>
-            <NamedRange ss:Name="Extent_Dimensions_300" ss:RefersTo="='Cataloging Worksheet'!C20"/>
-            <NamedRange ss:Name="Fund_561" ss:RefersTo="='Cataloging Worksheet'!C34"/>
-            <NamedRange ss:Name="General_Note_500" ss:RefersTo="='Cataloging Worksheet'!C27"/>
+            <NamedRange ss:Name="Date_of_Creation" ss:RefersTo="='Cataloging Worksheet'!C13"/>
+            <NamedRange ss:Name="Date_one_008" ss:RefersTo="='Cataloging Worksheet'!C14"/>
+            <NamedRange ss:Name="Date_two_008" ss:RefersTo="='Cataloging Worksheet'!C15"/>
+            <NamedRange ss:Name="Extent_300" ss:RefersTo="='Cataloging Worksheet'!C18"/>
+            <NamedRange ss:Name="Extent_Dimensions_300" ss:RefersTo="='Cataloging Worksheet'!C21"/>
+            <NamedRange ss:Name="Fund_561" ss:RefersTo="='Cataloging Worksheet'!C35"/>
+            <NamedRange ss:Name="General_Note_500" ss:RefersTo="='Cataloging Worksheet'!C28"/>
             <NamedRange ss:Name="genre_list" ss:RefersTo="='Controlled Values'!R2C9:R12C9"/>
-            <NamedRange ss:Name="Genre_Term_655" ss:RefersTo="='Cataloging Worksheet'!C39"/>
-            <NamedRange ss:Name="Geographic_651" ss:RefersTo="='Cataloging Worksheet'!C37"/>
+            <NamedRange ss:Name="Genre_Term_655" ss:RefersTo="='Cataloging Worksheet'!C40"/>
+            <NamedRange ss:Name="Geographic_651" ss:RefersTo="='Cataloging Worksheet'!C38"/>
             <NamedRange ss:Name="geographic_subdivision_list" ss:RefersTo="='Controlled Values'!R2C11:R16000C11"/>
-            <NamedRange ss:Name="Geographic_subdivisions_651" ss:RefersTo="='Cataloging Worksheet'!C38"/>
-            <NamedRange ss:Name="Language_code_008" ss:RefersTo="='Cataloging Worksheet'!C30"/>
+            <NamedRange ss:Name="Geographic_subdivisions_651" ss:RefersTo="='Cataloging Worksheet'!C39"/>
+            <NamedRange ss:Name="Language_code_008" ss:RefersTo="='Cataloging Worksheet'!C31"/>
             <NamedRange ss:Name="language_list" ss:RefersTo="='Controlled Values'!R2C12:R8C12"/>
-            <NamedRange ss:Name="Language_of_Materials_546" ss:RefersTo="='Cataloging Worksheet'!C29"/>
+            <NamedRange ss:Name="Language_of_Materials_546" ss:RefersTo="='Cataloging Worksheet'!C30"/>
             <NamedRange ss:Name="main_entry_list" ss:RefersTo="='Controlled Values'!R2C10:R14C10"/>
             <NamedRange ss:Name="Material_type_245" ss:RefersTo="='Cataloging Worksheet'!C11"/>
             <NamedRange ss:Name="materials_list" ss:RefersTo="='Controlled Values'!R2C14:R5C14"/>
             <NamedRange ss:Name="note_list" ss:RefersTo="='Controlled Values'!R2C6:R5C6"/>
-            <NamedRange ss:Name="Physical_Details_300" ss:RefersTo="='Cataloging Worksheet'!C19"/>
-            <NamedRange ss:Name="Place_code_008" ss:RefersTo="='Cataloging Worksheet'!C16"/>
-            <NamedRange ss:Name="Place_of_Creation_264" ss:RefersTo="='Cataloging Worksheet'!C15"/>
-            <NamedRange ss:Name="Preferred_Citation_524" ss:RefersTo="='Cataloging Worksheet'!C36"/>
-            <NamedRange ss:Name="Provenance_note_561" ss:RefersTo="='Cataloging Worksheet'!C31"/>
-            <NamedRange ss:Name="Public_URL" ss:RefersTo="='Cataloging Worksheet'!C41"/>
+            <NamedRange ss:Name="Physical_Details_300" ss:RefersTo="='Cataloging Worksheet'!C20"/>
+            <NamedRange ss:Name="Place_code_008" ss:RefersTo="='Cataloging Worksheet'!C17"/>
+            <NamedRange ss:Name="Place_of_Creation_264" ss:RefersTo="='Cataloging Worksheet'!C16"/>
+            <NamedRange ss:Name="Preferred_Citation_524" ss:RefersTo="='Cataloging Worksheet'!C37"/>
+            <NamedRange ss:Name="Provenance_note_561" ss:RefersTo="='Cataloging Worksheet'!C32"/>
+            <NamedRange ss:Name="Public_URL" ss:RefersTo="='Cataloging Worksheet'!C42"/>
             <NamedRange ss:Name="relator_list" ss:RefersTo="='Controlled Values'!R2C3:R11C3"/>
-            <NamedRange ss:Name="Scope_and_Contents_520" ss:RefersTo="='Cataloging Worksheet'!C26"/>
-            <NamedRange ss:Name="Source_561" ss:RefersTo="='Cataloging Worksheet'!C33"/>
+            <NamedRange ss:Name="Scope_and_Contents_520" ss:RefersTo="='Cataloging Worksheet'!C27"/>
+            <NamedRange ss:Name="Source_561" ss:RefersTo="='Cataloging Worksheet'!C34"/>
             <NamedRange ss:Name="source_list" ss:RefersTo="='Controlled Values'!R2C2:R6C2"/>
+            <NamedRange ss:Name="Statement_245" ss:RefersTo="='Cataloging Worksheet'!C12"/>
             <NamedRange ss:Name="Title_245" ss:RefersTo="='Cataloging Worksheet'!C10"/>
-            <NamedRange ss:Name="Title_Source_Note_500" ss:RefersTo="='Cataloging Worksheet'!C28"/>
+            <NamedRange ss:Name="Title_Source_Note_500" ss:RefersTo="='Cataloging Worksheet'!C29"/>
             <NamedRange ss:Name="Unique" ss:RefersTo="='Cataloging Worksheet'!C3"/>
-            <NamedRange ss:Name="Years_of_Acquisition_561" ss:RefersTo="='Cataloging Worksheet'!C35"/>
+            <NamedRange ss:Name="Years_of_Acquisition_561" ss:RefersTo="='Cataloging Worksheet'!C36"/>
         </Names>
     </xsl:template>
     
@@ -565,7 +566,7 @@
                     <Cell><Data ss:Type="String">$x Discovery and exploration</Data><NamedCell  ss:Name="geographic_subdivision_list"/></Cell>
                     <Cell><Data ss:Type="String">eng</Data><NamedCell ss:Name="language_list"/></Cell>
                     <Cell><Data ss:Type="String">c - Collection</Data><NamedCell ss:Name="bib_level_list"/></Cell>
-                    <Cell><Data ss:Type="String">: $k manuscript.</Data><NamedCell ss:Name="materials_list"/></Cell>
+                    <Cell><Data ss:Type="String">manuscript</Data><NamedCell ss:Name="materials_list"/></Cell>
                 </Row>
                 <Row ss:AutoFitHeight="0">
                     <Cell><Data ss:Type="String">GEN MSS VOL</Data><NamedCell ss:Name="call_number_list"/></Cell>
@@ -581,7 +582,7 @@
                     <Cell><Data ss:Type="String">$x Description and travel</Data><NamedCell ss:Name="geographic_subdivision_list"/></Cell>
                     <Cell><Data ss:Type="String">fre</Data><NamedCell ss:Name="language_list"/></Cell>
                     <Cell><Data ss:Type="String">m - Monograph/Item</Data><NamedCell ss:Name="bib_level_list"/></Cell>
-                    <Cell><Data ss:Type="String">: $k typescript.</Data><NamedCell ss:Name="materials_list"/></Cell>
+                    <Cell><Data ss:Type="String">typescript</Data><NamedCell ss:Name="materials_list"/></Cell>
                 </Row>
                 <Row ss:AutoFitHeight="0">
                     <Cell><Data ss:Type="String">GEN MSS FILE</Data><NamedCell ss:Name="call_number_list"/></Cell>
@@ -596,7 +597,7 @@
                     <Cell><Data ss:Type="String">100 3#</Data><NamedCell ss:Name="main_entry_list"/></Cell>
                     <Cell><Data ss:Type="String">$x Politics and government $y 19th century</Data><NamedCell ss:Name="geographic_subdivision_list"/></Cell>
                     <Cell><Data ss:Type="String">spa</Data><NamedCell ss:Name="language_list"/></Cell>
-                    <Cell ss:Index="14"><Data ss:Type="String">: $k printout.</Data><NamedCell ss:Name="materials_list"/></Cell>
+                    <Cell ss:Index="14"><Data ss:Type="String">printout</Data><NamedCell ss:Name="materials_list"/></Cell>
                 </Row>
                 <Row ss:AutoFitHeight="0">
                     <Cell><Data ss:Type="String">WA MSS</Data><NamedCell ss:Name="call_number_list"/></Cell>
@@ -697,7 +698,7 @@
             <Names>
                 <NamedRange ss:Name="_FilterDatabase" ss:RefersTo="='Cataloging Worksheet'!R1C1:R1C41" ss:Hidden="1"/>
             </Names>
-            <Table  ss:ExpandedColumnCount="41" x:FullColumns="1" x:FullRows="1" ss:DefaultRowHeight="15">
+            <Table  ss:ExpandedColumnCount="42" x:FullColumns="1" x:FullRows="1" ss:DefaultRowHeight="15">
                 <Column ss:AutoFitWidth="0" ss:Width="120"/>
                 <Column ss:AutoFitWidth="0" ss:Width="120"/>
                 <Column ss:AutoFitWidth="0" ss:Width="80"/>
@@ -710,6 +711,7 @@
                 <Column ss:AutoFitWidth="0" ss:Width="500"/>
                 <Column ss:AutoFitWidth="0" ss:Width="130"/>
                 <Column ss:AutoFitWidth="0" ss:Width="170"/>
+                <Column ss:AutoFitWidth="0" ss:Width="120"/>
                 <Column ss:AutoFitWidth="0" ss:Width="120"/>
                 <Column ss:AutoFitWidth="0" ss:Width="120"/>
                 <Column ss:AutoFitWidth="0" ss:Width="120"/>
@@ -751,6 +753,7 @@
                     <Cell ss:StyleID="s3"><Data ss:Type="String">URI</Data><NamedCell ss:Name="_FilterDatabase"/><NamedCell ss:Name="_1xx_0"/></Cell>
                     <Cell ss:StyleID="s4"><Data ss:Type="String">Title</Data><NamedCell ss:Name="_FilterDatabase"/><NamedCell ss:Name="Title_245"/></Cell>
                     <Cell ss:StyleID="s1"><Data ss:Type="String">Material type</Data><NamedCell ss:Name="_FilterDatabase"/><NamedCell ss:Name="Material_type_245"/></Cell>
+                    <Cell ss:StyleID="s1"><Data ss:Type="String">Title (statement of responsibility)</Data><NamedCell ss:Name="_FilterDatabase"/><NamedCell ss:Name="Statement_245"/></Cell>
                     <Cell ss:StyleID="s4"><Data ss:Type="String">Date of creation</Data><NamedCell ss:Name="_FilterDatabase"/><NamedCell ss:Name="Date_of_Creation"/></Cell>
                     <Cell ss:StyleID="s4"><Data ss:Type="String">Date one</Data><NamedCell ss:Name="_FilterDatabase"/><NamedCell ss:Name="Date_one_008"/></Cell>
                     <Cell ss:StyleID="s1"><Data ss:Type="String">Date two</Data><NamedCell ss:Name="_FilterDatabase"/><NamedCell ss:Name="Date_two_008"/></Cell>
@@ -777,7 +780,7 @@
                     <Cell ss:StyleID="s3"><Data ss:Type="String">Year(s) of Acquisition</Data><NamedCell ss:Name="_FilterDatabase"/><NamedCell ss:Name="Years_of_Acquisition_561"/></Cell>
                     <Cell ss:StyleID="s3"><Data ss:Type="String">Preferred Citation</Data><NamedCell ss:Name="_FilterDatabase"/><NamedCell ss:Name="Preferred_Citation_524"/></Cell>
                     <Cell ss:StyleID="s1"><Data ss:Type="String">Geographic (free text)</Data><NamedCell ss:Name="_FilterDatabase"/><NamedCell ss:Name="Geographic_651"/></Cell>
-                    <Cell ss:StyleID="s1"><Data ss:Type="String">Geographic subdivisions</Data><NamedCell ss:Name="_FilterDatabase"/><NamedCell ss:Name="Geographic_subdivisions_651"/></Cell>
+                    <Cell ss:StyleID="s1"><Data ss:Type="String">Geographic heading subdivisions</Data><NamedCell ss:Name="_FilterDatabase"/><NamedCell ss:Name="Geographic_subdivisions_651"/></Cell>
                     <Cell ss:StyleID="s1"><Data ss:Type="String">Genre Term</Data><NamedCell ss:Name="_FilterDatabase"/><NamedCell ss:Name="Genre_Term_655"/></Cell>
                     <Cell ss:StyleID="s1"><Data ss:Type="String">Additional MARC Fields</Data><NamedCell ss:Name="_FilterDatabase"/><NamedCell ss:Name="Additional_MARC_Fields"/></Cell>
                     <Cell ss:StyleID="s3"><Data ss:Type="String">Public URL</Data><NamedCell  ss:Name="_FilterDatabase"/><NamedCell ss:Name="Public_URL"/></Cell>
@@ -792,8 +795,9 @@
                     <Cell ss:StyleID="s7"><Data ss:Type="String">1xx $a  ($b, $c, $d, $q)</Data><NamedCell ss:Name="Creator_1xx"/></Cell>
                     <Cell ss:StyleID="s5"><Data ss:Type="String">1xx $e</Data><NamedCell ss:Name="_1xx_e"/></Cell>
                     <Cell ss:StyleID="s6"><Data ss:Type="String">1xx $0</Data><NamedCell ss:Name="_1xx_0"/></Cell>
-                    <Cell ss:StyleID="s7"><Data ss:Type="String">245 $a  ($b, $c)</Data><NamedCell ss:Name="Title_245"/></Cell>
+                    <Cell ss:StyleID="s7"><Data ss:Type="String">245 $a  ($b)</Data><NamedCell ss:Name="Title_245"/></Cell>
                     <Cell ss:StyleID="s5"><Data ss:Type="String">245 $k</Data><NamedCell ss:Name="Material_type_245"/></Cell>
+                    <Cell ss:StyleID="s5"><Data ss:Type="String">245 $c</Data><NamedCell ss:Name="Statement_245"/></Cell>
                     <Cell ss:StyleID="s7"><Data ss:Type="String">245 $f  or  264 $c</Data><NamedCell ss:Name="Date_of_Creation"/></Cell>
                     <Cell ss:StyleID="s7"><Data ss:Type="String">008</Data><NamedCell ss:Name="Date_one_008"/></Cell>
                     <Cell ss:StyleID="s5"><Data ss:Type="String">008</Data><NamedCell ss:Name="Date_two_008"/></Cell>
@@ -879,42 +883,42 @@
                 <Value>bib_level_list</Value>
             </DataValidation>
             <DataValidation xmlns="urn:schemas-microsoft-com:office:excel">
-                <Range>R3C30:R1048576C30</Range>
+                <Range>R3C31:R1048576C31</Range>
                 <Type>List</Type>
                 <Value>language_list</Value>
             </DataValidation>
             <DataValidation xmlns="urn:schemas-microsoft-com:office:excel">
-                <Range>R3C38:R1048576C38</Range>
+                <Range>R3C39:R1048576C39</Range>
                 <Type>List</Type>
                 <Value>geographic_subdivision_list</Value>
             </DataValidation>
             <DataValidation xmlns="urn:schemas-microsoft-com:office:excel">
-                <Range>R3C39:R1048576C39</Range>
+                <Range>R3C40:R1048576C40</Range>
                 <Type>List</Type>
                 <Value>genre_list</Value>
             </DataValidation>
             <DataValidation xmlns="urn:schemas-microsoft-com:office:excel">
-                <Range>R3C36:R1048576C36</Range>
+                <Range>R3C37:R1048576C37</Range>
                 <Type>List</Type>
                 <Value>curatorial_list</Value>
             </DataValidation>
             <DataValidation xmlns="urn:schemas-microsoft-com:office:excel">
-                <Range>R3C32:R1048576C32</Range>
+                <Range>R3C33:R1048576C33</Range>
                 <Type>List</Type>
                 <Value>acquisition_list</Value>
             </DataValidation>
             <DataValidation xmlns="urn:schemas-microsoft-com:office:excel">
-                <Range>R3C28:R1048576C28</Range>
+                <Range>R3C29:R1048576C29</Range>
                 <Type>List</Type>
                 <Value>note_list</Value>
             </DataValidation>
             <DataValidation xmlns="urn:schemas-microsoft-com:office:excel">
-                <Range>R3C22:R1048576C22</Range>
+                <Range>R3C23:R1048576C23</Range>
                 <Type>List</Type>
                 <Value>carrier_list</Value>
             </DataValidation>
             <DataValidation xmlns="urn:schemas-microsoft-com:office:excel">
-                <Range>R3C21:R1048576C21</Range>
+                <Range>R3C22:R1048576C22</Range>
                 <Type>List</Type>
                 <Value>content_list</Value>
             </DataValidation>
