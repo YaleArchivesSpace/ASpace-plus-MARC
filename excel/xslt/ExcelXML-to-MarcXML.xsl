@@ -232,10 +232,11 @@
             </xsl:if>
             
             <xsl:sequence select="mdc:create-marc-datafield('852', ' ', ' ', 'a', $location_852_a)"/>
-
-            <xsl:sequence select="mdc:create-marc-datafield('901', ' ', ' ', 'a', $accession_number)"/>
             
             <xsl:sequence select="mdc:create-marc-datafield('902', ' ', ' ', 'a', $automation-note)"/>
+            
+            <!-- need to update so that it can work with mulitple accession numbers -->
+            <xsl:sequence select="mdc:create-marc-datafield('952', ' ', ' ', 'a', $accession_number)"/>
 
             <xsl:if test="$Content_336 and not($rules='dacs')">
                 <marc:datafield tag="336" ind1=" " ind2=" ">
