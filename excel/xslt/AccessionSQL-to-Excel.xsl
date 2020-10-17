@@ -9,6 +9,10 @@
     xmlns:map="http://www.w3.org/2005/xpath-functions/map"
     exclude-result-prefixes="xs math map"
     version="3.0">
+ 
+ <!-- to do:  figure out how to automatically group the first 2 rows in the Cataloging Worksheet.
+
+no can do.  MS XML doesn't support this. sigh.  for now, just edit and group after the fact. -->
     
     <!-- stripping the space of ss:Row so that I can use position to get the accurate position of each ss:Cell child.
     otherwise, the position() function will include empty text nodes in the count when within the context of the ss:Cell template-->
@@ -35,36 +39,39 @@
         9 : "_1xx_0",
         10 : "Title_245",
         11 : "Material_type_245",
-        12 : "Date_of_Creation",
-        13 : "Date_one_008",
-        14 : "Date_two_008",
-        15 : "Place_of_Creation_264",
-        16 : "Place_code_008",
-        17 : "Extent_300",
-        18 : "Additional_Extent_300",
-        19 : "Physical_Details_300",
-        20 : "Extent_Dimensions_300",
-        21 : "Content_Type_336",
-        22 : "Carrier_Type_338",
-        23 : "Arrangement_351",
-        24 : "Access_Restrictions_506",
-        25 : "Biographical_Note_545",
-        26 : "Scope_and_Contents_520",
-        27 : "General_Note_500",
-        28 : "Title_Source_Note_500",
-        29 : "Language_of_Materials_546",
-        30 : "Language_code_008",
-        31 : "Provenance_note_561",
-        32 : "Accession_Type_561",
-        33 : "Source_561",
-        34 : "Fund_561",
-        35 : "Years_of_Acquisition_561",
-        36 : "Preferred_Citation_524",
-        37 : "Geographic_651",
-        38 : "Geographic_subdivisions_651",
-        39 : "Genre_Term_655",
-        40 : "Additional_MARC_Fields",
-        41 : "Public_URL"
+        12 : "Statement_245",
+        13 : "Date_of_Creation",
+        14 : "Date_one_008",
+        15 : "Date_two_008",
+        16 : "Place_of_Creation_264",
+        17 : "Place_code_008",
+        18 : "Extent_300",
+        19 : "Additional_Extent_300",
+        20 : "Physical_Details_300",
+        21 : "Extent_Dimensions_300",
+        22 : "Content_Type_336",
+        23 : "Carrier_Type_338",
+        24 : "Arrangement_351",
+        25 : "Access_Restrictions_506",
+        26 : "Biographical_Note_545",
+        27 : "Scope_and_Contents_520",
+        28 : "General_Note_500",
+        29 : "Title_Source_Note_500",
+        30 : "Language_of_Materials_546",
+        31 : "Language_code_008",
+        32 : "Provenance_note_561",
+        33 : "Accession_Type_561",
+        34 : "Source_561",
+        35 : "Fund_561",
+        36 : "Years_of_Acquisition_561",
+        37 : "Preferred_Citation_524",
+        38 : "Geographic_651",
+        39 : "Geographic_subdivisions_651",
+        40 : "Genre_Term_655", 
+        41 : "Additional_MARC_Fields",
+        42 : "Location code",
+        43 : "Additional Location code",
+        44 : "Public_URL"
         }'/>
  
     <xsl:template match="@*|node()">
@@ -106,7 +113,7 @@
             <xsl:apply-templates/>
         </xsl:copy>
     </xsl:template>
-    <xsl:template match="ss:Cell[41][ss:Data[normalize-space()]]" priority="2">
+    <xsl:template match="ss:Cell[44][ss:Data[normalize-space()]]" priority="2">
         <xsl:copy>
             <xsl:attribute namespace="urn:schemas-microsoft-com:office:spreadsheet" name="StyleID">
                 <xsl:value-of select="'s2'"/>
@@ -468,6 +475,7 @@
             <NamedRange ss:Name="Accession_Type_561" ss:RefersTo="='Cataloging Worksheet'!C33"/>
             <NamedRange ss:Name="acquisition_list" ss:RefersTo="='Controlled Values'!R2C7:R5C7"/>
             <NamedRange ss:Name="Additional_Extent_300" ss:RefersTo="='Cataloging Worksheet'!C19"/>
+            <NamedRange ss:Name="Additional_Location_code" ss:RefersTo="='Cataloging Worksheet'!C43"/>
             <NamedRange ss:Name="Additional_MARC_Fields" ss:RefersTo="='Cataloging Worksheet'!C41"/>
             <NamedRange ss:Name="Arrangement_351" ss:RefersTo="='Cataloging Worksheet'!C24"/>
             <NamedRange ss:Name="bib_level_list" ss:RefersTo="='Controlled Values'!R2C13:R3C13"/>
@@ -497,6 +505,8 @@
             <NamedRange ss:Name="Language_code_008" ss:RefersTo="='Cataloging Worksheet'!C31"/>
             <NamedRange ss:Name="language_list" ss:RefersTo="='Controlled Values'!R2C12:R8C12"/>
             <NamedRange ss:Name="Language_of_Materials_546" ss:RefersTo="='Cataloging Worksheet'!C30"/>
+            <NamedRange ss:Name="Location_code" ss:RefersTo="='Cataloging Worksheet'!C42"/>
+            <NamedRange ss:Name="location_code_list" ss:RefersTo="='Controlled Values'!R2C15:R11C15"/>
             <NamedRange ss:Name="main_entry_list" ss:RefersTo="='Controlled Values'!R2C10:R14C10"/>
             <NamedRange ss:Name="Material_type_245" ss:RefersTo="='Cataloging Worksheet'!C11"/>
             <NamedRange ss:Name="materials_list" ss:RefersTo="='Controlled Values'!R2C14:R5C14"/>
@@ -506,7 +516,7 @@
             <NamedRange ss:Name="Place_of_Creation_264" ss:RefersTo="='Cataloging Worksheet'!C16"/>
             <NamedRange ss:Name="Preferred_Citation_524" ss:RefersTo="='Cataloging Worksheet'!C37"/>
             <NamedRange ss:Name="Provenance_note_561" ss:RefersTo="='Cataloging Worksheet'!C32"/>
-            <NamedRange ss:Name="Public_URL" ss:RefersTo="='Cataloging Worksheet'!C42"/>
+            <NamedRange ss:Name="Public_URL" ss:RefersTo="='Cataloging Worksheet'!C44"/>
             <NamedRange ss:Name="relator_list" ss:RefersTo="='Controlled Values'!R2C3:R11C3"/>
             <NamedRange ss:Name="Scope_and_Contents_520" ss:RefersTo="='Cataloging Worksheet'!C27"/>
             <NamedRange ss:Name="Source_561" ss:RefersTo="='Cataloging Worksheet'!C34"/>
@@ -521,7 +531,7 @@
     
     <xsl:template name="controlled-values-worksheet">
         <Worksheet xmlns="urn:schemas-microsoft-com:office:spreadsheet" ss:Name="Controlled Values">
-            <Table ss:ExpandedColumnCount="14" ss:ExpandedRowCount="17" x:FullColumns="1" x:FullRows="1" ss:DefaultRowHeight="15">
+            <Table ss:ExpandedColumnCount="15" ss:ExpandedRowCount="17" x:FullColumns="1" x:FullRows="1" ss:DefaultRowHeight="15">
                 <Column ss:AutoFitWidth="0" ss:Width="125"/>
                 <Column ss:AutoFitWidth="0" ss:Width="138"/>
                 <Column ss:AutoFitWidth="0" ss:Width="155"/>
@@ -535,6 +545,7 @@
                 <Column ss:AutoFitWidth="0" ss:Width="290"/>
                 <Column ss:AutoFitWidth="0" ss:Width="69"/>
                 <Column ss:AutoFitWidth="0" ss:Width="138"/>
+                <Column ss:AutoFitWidth="0" ss:Width="110"/>
                 <Column ss:AutoFitWidth="0" ss:Width="110"/>
                 <Row ss:AutoFitHeight="0">
                     <Cell ss:StyleID="s1"><Data ss:Type="String">Call Number Prefix</Data></Cell>
@@ -551,6 +562,7 @@
                     <Cell ss:StyleID="s1"><Data ss:Type="String">Common language codes</Data></Cell>
                     <Cell ss:StyleID="s1"><Data ss:Type="String">Bibliographic levels</Data></Cell>
                     <Cell ss:StyleID="s1"><Data ss:Type="String">Material values</Data></Cell>
+                    <Cell ss:StyleID="s1"><Data ss:Type="String">Location code(s)</Data></Cell>
                 </Row>
                 <Row ss:AutoFitHeight="0">
                     <Cell><Data ss:Type="String">GEN MSS</Data><NamedCell ss:Name="call_number_list"/></Cell>
@@ -567,6 +579,7 @@
                     <Cell><Data ss:Type="String">eng</Data><NamedCell ss:Name="language_list"/></Cell>
                     <Cell><Data ss:Type="String">c - Collection</Data><NamedCell ss:Name="bib_level_list"/></Cell>
                     <Cell><Data ss:Type="String">manuscript</Data><NamedCell ss:Name="materials_list"/></Cell>
+                    <Cell><Data ss:Type="String">beingen</Data><NamedCell ss:Name="location_code_list"/></Cell>
                 </Row>
                 <Row ss:AutoFitHeight="0">
                     <Cell><Data ss:Type="String">GEN MSS VOL</Data><NamedCell ss:Name="call_number_list"/></Cell>
@@ -583,6 +596,7 @@
                     <Cell><Data ss:Type="String">fre</Data><NamedCell ss:Name="language_list"/></Cell>
                     <Cell><Data ss:Type="String">m - Monograph/Item</Data><NamedCell ss:Name="bib_level_list"/></Cell>
                     <Cell><Data ss:Type="String">typescript</Data><NamedCell ss:Name="materials_list"/></Cell>
+                    <Cell><Data ss:Type="String">beints</Data><NamedCell ss:Name="location_code_list"/></Cell>
                 </Row>
                 <Row ss:AutoFitHeight="0">
                     <Cell><Data ss:Type="String">GEN MSS FILE</Data><NamedCell ss:Name="call_number_list"/></Cell>
@@ -598,6 +612,7 @@
                     <Cell><Data ss:Type="String">$x Politics and government $y 19th century</Data><NamedCell ss:Name="geographic_subdivision_list"/></Cell>
                     <Cell><Data ss:Type="String">spa</Data><NamedCell ss:Name="language_list"/></Cell>
                     <Cell ss:Index="14"><Data ss:Type="String">printout</Data><NamedCell ss:Name="materials_list"/></Cell>
+                    <Cell><Data ss:Type="String">beinosb</Data><NamedCell ss:Name="location_code_list"/></Cell>
                 </Row>
                 <Row ss:AutoFitHeight="0">
                     <Cell><Data ss:Type="String">WA MSS</Data><NamedCell ss:Name="call_number_list"/></Cell>
@@ -611,7 +626,7 @@
                     <Cell><Data ss:Type="String">Born digital. $2 aat</Data><NamedCell ss:Name="genre_list"/></Cell>
                     <Cell ss:Index="11"><Data ss:Type="String">$x Politics and government $y 20th century</Data><NamedCell ss:Name="geographic_subdivision_list"/></Cell>
                     <Cell><Data ss:Type="String">ger</Data><NamedCell ss:Name="language_list"/></Cell>
-                    <Cell ss:Index="14"><NamedCell ss:Name="materials_list"/></Cell>
+                    <Cell ss:Index="15"><Data ss:Type="String">beintso</Data><NamedCell ss:Name="location_code_list"/></Cell>
                 </Row>
                 <Row ss:AutoFitHeight="0">
                     <Cell><Data ss:Type="String">YCAL MSS</Data><NamedCell ss:Name="call_number_list"/></Cell>
@@ -622,36 +637,42 @@
                     <Cell><Data ss:Type="String">110 0#</Data><NamedCell ss:Name="main_entry_list"/></Cell>
                     <Cell><Data ss:Type="String">$x Intellectual Life $y 19th century</Data><NamedCell ss:Name="geographic_subdivision_list"/></Cell>
                     <Cell><Data ss:Type="String">ita</Data><NamedCell ss:Name="language_list"/></Cell>
+                    <Cell ss:Index="15"><Data ss:Type="String">beinwa</Data><NamedCell ss:Name="location_code_list"/></Cell>
                 </Row>
                 <Row ss:AutoFitHeight="0">
                     <Cell ss:Index="3"><Data ss:Type="String">issuing body</Data><NamedCell ss:Name="relator_list"/></Cell>
                     <Cell ss:Index="8"><Data ss:Type="String">OSB</Data><NamedCell ss:Name="curatorial_list"/></Cell>
-                    <Cell><Data ss:Type="String">Drawings. $2 aat</Data><NamedCell ss:Name="genre_list"/></Cell>
+                    <Cell><Data ss:Type="String">Drawings (visual works) $2 aat</Data><NamedCell ss:Name="genre_list"/></Cell>
                     <Cell><Data ss:Type="String">110 1#</Data><NamedCell ss:Name="main_entry_list"/></Cell>
                     <Cell><Data ss:Type="String">$x Intellectual Life $y 20th century</Data><NamedCell  ss:Name="geographic_subdivision_list"/></Cell>
                     <Cell><Data ss:Type="String">lat</Data><NamedCell ss:Name="language_list"/></Cell>
+                    <Cell ss:Index="15"><Data ss:Type="String">beintsw</Data><NamedCell ss:Name="location_code_list"/></Cell>
                 </Row>
                 <Row ss:AutoFitHeight="0">
                     <Cell ss:Index="3"><Data ss:Type="String">photographer</Data><NamedCell ss:Name="relator_list"/></Cell>
                     <Cell ss:Index="9"><Data ss:Type="String">Manuscript maps. $2 lcgft</Data><NamedCell ss:Name="genre_list"/></Cell>
                     <Cell><Data ss:Type="String">110 2#</Data><NamedCell ss:Name="main_entry_list"/></Cell>
                     <Cell><Data ss:Type="String">$x Social life and customs $y 19th century</Data><NamedCell  ss:Name="geographic_subdivision_list"/></Cell>
+                    <Cell ss:Index="15"><Data ss:Type="String">beinycal</Data><NamedCell ss:Name="location_code_list"/></Cell>
                 </Row>
                 <Row ss:AutoFitHeight="0">
                     <Cell ss:Index="3"><Data ss:Type="String">printmaker</Data><NamedCell ss:Name="relator_list"/></Cell>
                     <Cell ss:Index="9"><Data ss:Type="String">Photograph albums. $2 aat</Data><NamedCell ss:Name="genre_list"/></Cell>
                     <Cell ss:Index="11"><Data ss:Type="String">$x Social life and customs $y 20th century</Data><NamedCell ss:Name="geographic_subdivision_list"/></Cell>
+                    <Cell ss:Index="15"><Data ss:Type="String">beintsa</Data><NamedCell ss:Name="location_code_list"/></Cell>
                 </Row>
                 <Row ss:AutoFitHeight="0">
                     <Cell ss:Index="3"><Data ss:Type="String">publisher</Data><NamedCell ss:Name="relator_list"/></Cell>
                     <Cell ss:Index="9"><Data ss:Type="String">Photographs. $2 aat</Data><NamedCell ss:Name="genre_list"/></Cell>
                     <Cell><Data ss:Type="String">111 0#</Data><NamedCell ss:Name="main_entry_list"/></Cell>
                     <Cell><Data ss:Type="String">$x Social conditions $y 19th century</Data><NamedCell ss:Name="geographic_subdivision_list"/></Cell>
+                    <Cell ss:Index="15"><Data ss:Type="String">beinycgl</Data><NamedCell ss:Name="location_code_list"/></Cell>
                 </Row>
                 <Row ss:AutoFitHeight="0">
                     <Cell ss:Index="9"><Data ss:Type="String">Scrapbooks. $2 aat</Data><NamedCell ss:Name="genre_list"/></Cell>
                     <Cell><Data ss:Type="String">111 1#</Data><NamedCell ss:Name="main_entry_list"/></Cell>
                     <Cell><Data ss:Type="String">$x Social conditions $y 20th century</Data><NamedCell ss:Name="geographic_subdivision_list"/></Cell>
+                    <Cell ss:Index="15"><Data ss:Type="String">beintsg</Data><NamedCell ss:Name="location_code_list"/></Cell>
                 </Row>
                 <Row ss:AutoFitHeight="0">
                     <Cell ss:Index="10"><Data ss:Type="String">111 2#</Data><NamedCell ss:Name="main_entry_list"/></Cell>
@@ -696,9 +717,9 @@
     <xsl:template name="primary-worksheet">
         <Worksheet xmlns="urn:schemas-microsoft-com:office:spreadsheet" ss:Name="Cataloging Worksheet">
             <Names>
-                <NamedRange ss:Name="_FilterDatabase" ss:RefersTo="='Cataloging Worksheet'!R1C1:R1C41" ss:Hidden="1"/>
+                <NamedRange ss:Name="_FilterDatabase" ss:RefersTo="='Cataloging Worksheet'!R1C1:R1C44" ss:Hidden="1"/>
             </Names>
-            <Table  ss:ExpandedColumnCount="42" x:FullColumns="1" x:FullRows="1" ss:DefaultRowHeight="15">
+            <Table  ss:ExpandedColumnCount="44" x:FullColumns="1" x:FullRows="1" ss:DefaultRowHeight="15">
                 <Column ss:AutoFitWidth="0" ss:Width="120"/>
                 <Column ss:AutoFitWidth="0" ss:Width="120"/>
                 <Column ss:AutoFitWidth="0" ss:Width="80"/>
@@ -740,6 +761,8 @@
                 <Column ss:AutoFitWidth="0" ss:Width="200"/>
                 <Column ss:AutoFitWidth="0" ss:Width="200"/>
                 <Column ss:AutoFitWidth="0" ss:Width="400"/>
+                <Column ss:AutoFitWidth="0" ss:Width="80"/>
+                <Column ss:AutoFitWidth="0" ss:Width="80"/>
                 <Column ss:AutoFitWidth="0" ss:Width="450"/>
                 <Row ss:AutoFitHeight="0">
                     <Cell ss:StyleID="s3"><Data ss:Type="String">Accession number</Data><NamedCell ss:Name="_FilterDatabase"/><NamedCell ss:Name="Accession_number"/></Cell>
@@ -783,6 +806,8 @@
                     <Cell ss:StyleID="s1"><Data ss:Type="String">Geographic heading subdivisions</Data><NamedCell ss:Name="_FilterDatabase"/><NamedCell ss:Name="Geographic_subdivisions_651"/></Cell>
                     <Cell ss:StyleID="s1"><Data ss:Type="String">Genre Term</Data><NamedCell ss:Name="_FilterDatabase"/><NamedCell ss:Name="Genre_Term_655"/></Cell>
                     <Cell ss:StyleID="s1"><Data ss:Type="String">Additional MARC Fields</Data><NamedCell ss:Name="_FilterDatabase"/><NamedCell ss:Name="Additional_MARC_Fields"/></Cell>
+                    <Cell ss:StyleID="s4"><Data ss:Type="String">Location code</Data><NamedCell ss:Name="_FilterDatabase"/><NamedCell ss:Name="Location_code"/></Cell>
+                    <Cell ss:StyleID="s1"><Data ss:Type="String">Additional Location code</Data><NamedCell ss:Name="_FilterDatabase"/><NamedCell ss:Name="Additional_Location_code"/></Cell>
                     <Cell ss:StyleID="s3"><Data ss:Type="String">Public URL</Data><NamedCell  ss:Name="_FilterDatabase"/><NamedCell ss:Name="Public_URL"/></Cell>
                 </Row>
                 <Row ss:AutoFitHeight="0">
@@ -826,7 +851,9 @@
                     <Cell ss:StyleID="s5"><Data ss:Type="String">651 $a</Data><NamedCell ss:Name="Geographic_651"/></Cell>
                     <Cell ss:StyleID="s5"><Data ss:Type="String">651 $x, $z, $v</Data><NamedCell ss:Name="Geographic_subdivisions_651"/></Cell>
                     <Cell ss:StyleID="s5"><Data ss:Type="String">655 $a</Data><NamedCell ss:Name="Genre_Term_655"/></Cell>
-                    <Cell ss:StyleID="s5"><NamedCell ss:Name="Additional_MARC_Fields"/></Cell>
+                    <Cell ss:StyleID="s5"><NamedCell ss:Name="Additional_MARC_Fields"/></Cell>   
+                    <Cell ss:StyleID="s7"><NamedCell ss:Name="Location_code"/></Cell>
+                    <Cell ss:StyleID="s5"><NamedCell ss:Name="Additional_Location_code"/></Cell>
                     <Cell ss:StyleID="s6"><NamedCell ss:Name="Public_URL"/></Cell>
                 </Row>
                 <!-- time to add the rows from our SQL output.  that's it. -->
@@ -942,7 +969,12 @@
                 <Type>List</Type>
                 <Value>call_number_list</Value>
             </DataValidation>
-            <AutoFilter  x:Range="R1C1:R1C41" xmlns="urn:schemas-microsoft-com:office:excel"></AutoFilter>
+            <DataValidation xmlns="urn:schemas-microsoft-com:office:excel">
+                <Range>R3C42:R1048576C43</Range>
+                <Type>List</Type>
+                <Value>location_code_list</Value>
+            </DataValidation>
+            <AutoFilter  x:Range="R1C1:R1C44" xmlns="urn:schemas-microsoft-com:office:excel"></AutoFilter>
         </Worksheet>
     </xsl:template>
         
@@ -1061,7 +1093,7 @@
     <Cell ss:Index="2" ss:StyleID="s27"><Data ss:Type="String">337 media type</Data></Cell>
     <Cell ss:StyleID="s20"><Data ss:Type="String">Defaults to unmediated for DCRM records</Data></Cell>
     <Cell ss:Index="6" ss:StyleID="s24"><Data ss:Type="String">Creator/1xx</Data></Cell>
-    <Cell ss:StyleID="s23"><Data ss:Type="String">Enter the name of the primary creator, including $d, $c, $q.  If no 1xx, leave blank</Data></Cell>
+    <Cell ss:StyleID="s23"><Data ss:Type="String">Enter the name of the primary creator, including $d, $c, $q.  If no 1xx, leave blank. Accessions with more than one creator will have all the creators added to this column separated by three asterisks (***).  When cataloging, leave one primary creator in the 1xx, and add any other creators in 7xx fields.</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0" ss:Height="45">
     <Cell ss:Index="2" ss:StyleID="s27"><Data ss:Type="String">506</Data></Cell>
@@ -1181,7 +1213,7 @@
    </Row>
    <Row ss:AutoFitHeight="0" ss:Height="85.5">
     <Cell ss:Index="6" ss:StyleID="s75"><Data ss:Type="String">Additional MARC fields</Data></Cell>
-    <Cell ss:StyleID="s76"><Data ss:Type="String">Free text for any extra field. Must be entered in numerical tag order. Must include the MARC tag, the indicators, and the subfield delimiters in the format ($). Multiple fields must be separated by a return (Alt + Enter in Excel). The transformation scenario will place the fields in the appropriate order.</Data></Cell>
+    <Cell ss:StyleID="s76"><Data ss:Type="String">Free text for any extra field. Must be entered in numerical tag order. Must include the MARC tag, the indicators, and the subfield delimiters in the format ($). Multiple fields must be separated by a return (Alt + Enter in Excel). The transformation scenario will place the fields in the appropriate order. This column is repeatable; you may duplicate it. Copy the header into the new column.</Data></Cell>
    </Row>
    <Row ss:AutoFitHeight="0" ss:Height="45" ss:Span="10"/>
    <Row ss:Index="59" ss:AutoFitHeight="0" ss:Height="75"/>

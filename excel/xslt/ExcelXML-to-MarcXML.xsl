@@ -14,18 +14,10 @@
     <!-- to do:
         
         also need a way to indicate combined accessions.  
-        
-         
-        
-        Ellipsis (…) is identified by voyager as an unrecogized character, so I re-entered in voyager
-            
-        do something with $material_type.  will be manuscript, typescript, printout..  or empty.
-            test
+             
+        Ellipsis (…) is identified by voyager as an unrecogized character, so I re-entered in voyager. Use a character replcement for this.
 
         review the punctuation updates.
-        
-        add a 9xx to indicate a note about this file being generated as part of a bulk cataloging process....
-        plus the current year. 
         
         add a sample schematron file.... and add it to the pipeline.
         
@@ -37,9 +29,12 @@
     <xsl:param name="language-of-cataloging" select="'eng'"/>
     <xsl:param name="location_852_a" select="'Beinecke Rare Book and Manuscript Library, Yale University, New Haven, CT'"/>
     <xsl:param name="default_access_note" select="'This material is open for research.'"/>
-    <xsl:param name="automation-note" select="'This record was initially created in ' ||  xs:string(year-from-date(current-date())) || ' by Yale''s Excel-to-MARC conversion process.'"/>
+    <xsl:param name="repo_for_automation_note" select="'Beinecke Manuscript Unit'"/>
+    <xsl:param name="conversion_date" select="current-date()"/>
+    <xsl:param name="automation_note" select="$repo_for_automation_note || ' bulk cataloging workflow, ' || format-date($conversion_date, '[Y] [MNn,*-3]', 'en', (), ()) || '.'"/>
     <!-- not used currently, but could be utilized if we decide to combine the date one and date two fields -->
     <xsl:param name="date-separator" select="' - '"/>
+    <xsl:param name="default_008_place_of_publication" select="'ctu'"/>
 
     <xsl:import href="Mapping-file.xsl"/>
 
@@ -151,19 +146,24 @@
         <xsl:variable name="Geographic_subfields_651" select="ss:Cell[ss:Data[normalize-space()]][ss:NamedCell/@ss:Name = 'Geographic_subfields_651']"/>
         <xsl:variable name="Genre_Term_655" select="ss:Cell[ss:Data[normalize-space()]][ss:NamedCell/@ss:Name = 'Genre_Term_655']"/>
         <xsl:variable name="Additional_MARC" select="ss:Cell[ss:Data[normalize-space()]][ss:NamedCell/@ss:Name = 'Additional_MARC_Fields']"/>
+        <xsl:variable name="location_code_1" select="ss:Cell[ss:Data[normalize-space()]][ss:NamedCell/@ss:Name = 'Location_code']"/>
+        <xsl:variable name="location_code_2" select="ss:Cell[ss:Data[normalize-space()]][ss:NamedCell/@ss:Name = 'Additional_Location_code']"/>
         <!-- not checking out the Public_URL column just yet, but will need that for ASpace updates....  once we can get bibids back from Voyager -->
         
-        <xsl:variable name="marcxml" select=" if ($_1xx_0) then document(normalize-space($_1xx_0) || '.marcxml.xml') else 0"/>
+        <!--great candidate for try / catch here.  but for now, let's just switch to https due to change on 2020-08-06 at LoC  --> 
+        <xsl:variable name="marcxml" select=" if ($_1xx_0) then document(replace(normalize-space($_1xx_0),  'http://', 'https://') || '.marcxml.xml') else 0"/> 
         
         <xsl:variable name="born-digital-006" select="some $text in ($Genre_Term_655, $Additional_MARC) satisfies contains(lower-case($text), 'born digital')"/>
-
+        <xsl:variable name="drawings-006" select="some $text in ($Genre_Term_655, $Additional_MARC) satisfies contains(lower-case($text), 'drawings')"/>
+        <xsl:variable name="manuscript-maps-006" select="some $text in ($Genre_Term_655, $Additional_MARC) satisfies contains(lower-case($text), 'manuscript maps')"/>
+        <xsl:variable name="photographs-006" select="some $text in ($Genre_Term_655, $Additional_MARC) satisfies contains(lower-case($text), 'photographs')"/>
         <marc:record>
             <marc:leader>
                 <!-- MARC Edit will  add the record length, so we keep that set to 00000 for the time being .-->
                 <!-- add the leader 06 field to a mapping file? -->
                 <xsl:variable name="leader_06" select="if ($rules = 'dcrmg') then 'k' else if ($rules = 'dcrmc') then 'f' else if ($rules = 'dcrmm') then 'd' else 'p'"/>
                 <!-- change this once we figure out how folks should indicate this field -->
-                <xsl:variable name="leader_07" select="if ($bib_level) then substring(normalize-space($bib_level), 1, 1) else 'c'"/>
+                <xsl:variable name="leader_07" select="if ($rules =('dacs', 'dcrmmss')) then 'c' else if ($bib_level) then substring(normalize-space($bib_level), 1, 1) else 'c'"/>
                 <xsl:variable name="leader_08" select="if ($rules = ('dcrmc', 'dcrmg')) then ' ' else 'a'"/>
                 <xsl:variable name="leader_end" select="' 2200277 i 4500'"/>
                 <xsl:value-of select="'00000' || $leader_05 || $leader_06 || $leader_07 || $leader_08 || $leader_end" />
@@ -171,11 +171,13 @@
             <xsl:call-template name="control-fields">
                 <xsl:with-param name="rules" select="$rules"/>
                 <xsl:with-param name="born-digital-006" select="$born-digital-006"/>
+                <xsl:with-param name="drawings-006" select="$drawings-006"/>
+                <xsl:with-param name="manuscript-maps-006" select="$manuscript-maps-006"/>
+                <xsl:with-param name="photographs-006" select="$photographs-006"/>       
                 <xsl:with-param name="Date_one_008" select="$Date_one_008"/>
                 <xsl:with-param name="Date_two_008" select="$Date_two_008"/>
                 <xsl:with-param name="Place_code_008" select="$Place_code_008"/>
                 <xsl:with-param name="Language_code_008" select="$Language_code_008"/>
-                <xsl:with-param name="Genre_Term_655" select="if (contains($Genre_Term_655, '$')) then normalize-space(substring-before($Genre_Term_655, '$')) else $Genre_Term_655"/>
             </xsl:call-template>
             <xsl:call-template name="cataloging_040">
                 <xsl:with-param name="rules" select="$rules"/>
@@ -215,6 +217,7 @@
                 <xsl:call-template name="citation_524">
                     <xsl:with-param name="title" select="$title"/>
                     <xsl:with-param name="citation" select="$citation"/>
+                    <xsl:with-param name="rules" select="$rules"/>
                 </xsl:call-template>
             </xsl:if>
             <xsl:call-template name="ownership_561">
@@ -232,10 +235,27 @@
             </xsl:if>
             
             <xsl:sequence select="mdc:create-marc-datafield('852', ' ', ' ', 'a', $location_852_a)"/>
+          
+            <!-- all of this is a bit silly right now, but once we get all of the requirements right we can go back and refactor.-->
+            <xsl:if test="$location_code_1">
+                <xsl:call-template name="holdings_951">
+                    <xsl:with-param name="location_code" select="$location_code_1"/>
+                    <xsl:with-param name="call_number_prefix" select="$call_number_prefix"/>
+                    <xsl:with-param name="call_number_suffix" select="$call_number_suffix"/>
+                    <xsl:with-param name="automation_note" select="$automation_note"/>
+                </xsl:call-template>
+            </xsl:if>
             
-            <xsl:sequence select="mdc:create-marc-datafield('902', ' ', ' ', 'a', $automation-note)"/>
+            <xsl:if test="$location_code_2">
+                <xsl:call-template name="holdings_951">
+                    <xsl:with-param name="location_code" select="$location_code_2"/>
+                    <xsl:with-param name="call_number_prefix" select="$call_number_prefix"/>
+                    <xsl:with-param name="call_number_suffix" select="$call_number_suffix"/>
+                    <xsl:with-param name="automation_note" select="$automation_note"/>
+                </xsl:call-template>
+            </xsl:if>
             
-            <!-- need to update so that it can work with mulitple accession numbers -->
+            <!-- need to update this process in case the 952 needs to record more than one accession ID.   -->
             <xsl:sequence select="mdc:create-marc-datafield('952', ' ', ' ', 'a', $accession_number)"/>
 
             <xsl:if test="$Content_336 and not($rules='dacs')">
@@ -315,18 +335,33 @@
     <xsl:template name="control-fields">
         <xsl:param name="rules"/>
         <xsl:param name="born-digital-006"/>
+        <xsl:param name="drawings-006"/>
+        <xsl:param name="photographs-006"/>
+        <xsl:param name="manuscript-maps-006"/>
         <xsl:param name="Date_one_008"/>
         <xsl:param name="Date_two_008"/>
         <xsl:param name="Place_code_008"/>
         <xsl:param name="Language_code_008"/>
-        <xsl:param name="Genre_Term_655"/>
         
+        <!--
         <xsl:variable name="field006_00-04" select="if ($Genre_Term_655 eq 'Photographs') then 'kn   '
             else if ($Genre_Term_655 eq 'Drawings') then 'an   '
             else if ($Genre_Term_655 eq 'Manuscript maps') then 'a0e  '
             else if ($rules eq 'dcrmmss') then 't     ' else '     '"/>
+        
         <xsl:variable name="field006_05-11" select="'       '"/>
         <xsl:variable name="field006_12-17" select="'000 0 '"/>
+        
+         <xsl:choose>
+                <xsl:when test="$rules = 'dcrmmss'">
+                    <xsl:value-of select="$field006_00-04 || $field006_05-11 || $field006_12-17"/>    
+                </xsl:when>
+                <xsl:when test="$rules = ('dacs')">
+                    <xsl:value-of select="$field006_00-04"/>    
+                </xsl:when>
+                <xsl:otherwise/>
+            </xsl:choose>
+        -->
         
         <xsl:variable name="field008_00-05"  select="substring(string(current-date()), 3, 2) || substring(string(current-date()), 6, 2) || substring(string(current-date()), 9, 2)"/>
         <xsl:variable name="field008_06"
@@ -346,7 +381,8 @@
                     '    '"/>
         <xsl:variable name="field008_15-17"
             select="
-                if (string-length($Place_code_008) eq 3) then
+                if ($rules eq 'dacs') then $default_008_place_of_publication
+                else if (string-length($Place_code_008) eq 3) then
                     $Place_code_008
                     else if (string-length($Place_code_008) eq 2) then 
                     $Place_code_008 || '#'
@@ -355,9 +391,9 @@
        <!-- dcrmm differences.  -->
         <xsl:variable name="field008_18-34" select="
             if ($rules = 'dcrmm') 
-            then 'uuu| |      n    '
+            then 'uuu _ ______n_   '
             else
-            '                 '"/>
+            '     _           '"/>
         <xsl:variable name="field008_35-37"
             select="
                 if ($Language_code_008) then
@@ -365,26 +401,37 @@
                 else
                     '   '"/>
         <xsl:variable name="field008_38-39" select="' d'"/>
-     
-        <!-- will likely change how we handle the 006 over time -->
-        <marc:controlfield tag="006">
-            <xsl:choose>
-                <xsl:when test="$rules = 'dcrmmss'">
-                    <xsl:value-of select="$field006_00-04 || $field006_05-11 || $field006_12-17"/>    
-                </xsl:when>
-                <xsl:when test="$rules = ('dacs')">
-                    <xsl:value-of select="$field006_00-04"/>    
-                </xsl:when>
-                <xsl:otherwise/>
-            </xsl:choose>
-        </marc:controlfield>
-        
+
+       
+        <!-- 006 -->
+        <!-- could have multiple 006 fields.  we'll call them here, as necessary -->
         <xsl:if test="$born-digital-006">
-            <marc:controlfield tag="006">
-                <xsl:value-of select="'m    __  | |      '"/>
-            </marc:controlfield>
+            <xsl:call-template name="create_006">
+                <xsl:with-param name="values" select="'m    __  | |      '"/>
+            </xsl:call-template>
+        </xsl:if>
+        <xsl:if test="$drawings-006">
+            <xsl:call-template name="create_006">
+                <xsl:with-param name="values" select="'knnn _     __   an'"/>
+            </xsl:call-template>
+        </xsl:if>
+        <xsl:if test="$photographs-006">
+            <xsl:call-template name="create_006">
+                <xsl:with-param name="values" select="'knnn _     __   kn'"/>
+            </xsl:call-template>
+        </xsl:if>
+        <xsl:if test="$manuscript-maps-006">
+            <xsl:call-template name="create_006">
+                <xsl:with-param name="values" select="'f______ a  __ 0 e_'"/>
+            </xsl:call-template>
+        </xsl:if>
+        <xsl:if test="$rules = ('dcrmmss')">
+            <xsl:call-template name="create_006">
+                <xsl:with-param name="values" select="'t___________000 0_'"/>
+            </xsl:call-template>
         </xsl:if>
     
+        <!-- 007 -->
         <!-- will likely change how we handle the 007 field over time -->
         <xsl:if test="$rules = ('dcrmc')">
             <marc:controlfield tag="007">
@@ -396,8 +443,16 @@
                 <xsl:value-of select="'k|||||'"/>
             </marc:controlfield>
         </xsl:if>
+        <!-- 008 -->
         <marc:controlfield tag="008">
             <xsl:value-of select="$field008_00-05 || $field008_06 || $field008_07-10 || $field008_11-14 || $field008_15-17 || $field008_18-34 || $field008_35-37 || $field008_38-39"/>
+        </marc:controlfield>
+    </xsl:template>
+    
+    <xsl:template name="create_006">
+        <xsl:param name="values"/>
+        <marc:controlfield tag="006">
+            <xsl:value-of select="$values"/>
         </marc:controlfield>
     </xsl:template>
 
@@ -541,8 +596,9 @@
     <xsl:template name="citation_524">
         <xsl:param name="title"/>
         <xsl:param name="citation"/>
+        <xsl:param name="rules"/>
         <!-- will it have trailing punctuation or not? -->
-        <xsl:variable name="title-to-concat"
+        <xsl:variable name="title-prep"
             select="if (contains($title, ': $')) then
             normalize-space(substring-before($title, ': $')) || '.'
             else if (contains($title, '$')) then
@@ -551,9 +607,9 @@
                     normalize-space($title) || '.'
                 else
                     $title"/>
+        <xsl:variable name="title-to-concat" select="if ($rules = ('dcrmc', 'dcrmg', 'dcrmm')) then $title-prep => translate('[]', '') else $title-prep"/>
         <marc:datafield tag="524" ind1=" " ind2=" ">
-            <!-- change this to only strip '[]' in the title if there's a 5xx note that has the word "title" and "devised". -->
-            <xsl:sequence select="mdc:create-marc-subfield('a', normalize-space($title-to-concat) => translate('[]', '') || ' ' || map:get($curatorial_mapping, lower-case($citation)))"></xsl:sequence>
+            <xsl:sequence select="mdc:create-marc-subfield('a', normalize-space($title-to-concat) || ' ' || map:get($curatorial_mapping, lower-case($citation)))"></xsl:sequence>
         </marc:datafield>
     </xsl:template>
 
@@ -608,6 +664,33 @@
             </marc:subfield>
         </marc:datafield>
     </xsl:template>
+  
+    <xsl:template name="holdings_951">
+        <xsl:param name="location_code"/>
+        <xsl:param name="call_number_prefix"/>
+        <xsl:param name="call_number_suffix"/>
+        <xsl:param name="automation_note"/>
+        <!-- 
+        $b: Location code (nr)
+        $h: Call number sequence (nr)
+        $i: Call number unique ID (nr)
+        $x: Nonpublic note (r)
+        $z: Public note (r)
+        $m: Barcode (nr)
+        $n: Permloc (nr)
+        $o: Item type (nr)
+        $p: Enum (nr)
+        $q: Statistical category (r)
+        
+            where nr = non-repeatable, and r = repeatable
+        -->
+        <marc:datafield tag="951" ind1="8" ind2="0">
+            <xsl:sequence select="mdc:create-marc-subfield('b', $location_code)"/>
+            <xsl:sequence select="mdc:create-marc-subfield('h', $call_number_prefix)"/>
+            <xsl:sequence select="mdc:create-marc-subfield('i', $call_number_suffix)"/>
+            <xsl:sequence select="mdc:create-marc-subfield('x', $automation_note)"/>
+        </marc:datafield>
+    </xsl:template> 
     
     <xsl:template match="@*" mode="copy">
         <xsl:copy copy-namespaces="no">
