@@ -27,15 +27,15 @@ if [ ${#xmlfiles[@]} -gt 0 ]; then
     $JAVA $parameters $CP net.sf.saxon.Transform -t -s:export/tmp/$fne -xsl:"https://raw.githubusercontent.com/YaleArchivesSpace/ASpace-plus-MARC/master/excel/xslt/MarcXML-reorder-and-prep.xsl" -o:export/tmp/$fne -warnings:silent
     $JAVA $parameters $CP net.sf.saxon.Transform -t -s:export/tmp/$fne -xsl:"https://raw.githubusercontent.com/YaleArchivesSpace/ASpace-plus-MARC/master/excel/xslt/Deal-with-ISBD-issues.xsl" -o:export/tmp/$fne.xml -warnings:silent
 
-	  $MARCEDIT_PATH/MarcEdit3 -s export/tmp/$fne -d export/tmp/$filename.mrc -xmlmarc
+    $MARCEDIT_PATH/MarcEdit3 -s export/tmp/$fne -d export/tmp/$filename.mrc -xmlmarc
 
-	  echo "Generating import file... (please wait)"
+    echo "Generating import file... (please wait)"
 
-	  mrcfiles=(`find ./export/tmp -maxdepth 1 -name "*.mrc"`)
-	  #for f in $mrcfiles; do
-	  #	export files=$f
+    mrcfiles=(`find ./export/tmp -maxdepth 1 -name "*.mrc"`)
+    #for f in $mrcfiles; do
+    #	export files=$f
 
-	  $MARCEDIT_PATH/MarcEdit3 -s $mrcfiles -d import/$USER-$DateTime.mrc -join
+    $MARCEDIT_PATH/MarcEdit3 -s $mrcfiles -d import/$USER-$DateTime.mrc -join
   done
 
   echo "MARC file created."

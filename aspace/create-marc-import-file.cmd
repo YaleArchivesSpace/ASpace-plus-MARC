@@ -14,18 +14,18 @@ if not exist export\backup mkdir export\backup
 echo Post-processing MARCXML files...
 
  for %%f in (export\*.xml) do (
-            echo %%~nf
+	echo %%~nf
 
 	%JAVA% %parameters% %CP% net.sf.saxon.Transform -t -s:export\%%~nf.xml -xsl:"https://raw.githubusercontent.com/YaleArchivesSpace/ASpace-plus-MARC/master/aspace/xslt/MARCxml-post-processing.xsl" -o:export\tmp\%%~nf.xml -warnings:silent
 
-  %JAVA% %parameters% %CP% net.sf.saxon.Transform -t -s:export\%%~nf.xml -xsl:"https://raw.githubusercontent.com/YaleArchivesSpace/ASpace-plus-MARC/master/excel/xslt/MarcXML-reorder-and-prep.xsl" -o:export\tmp\%%~nf.xml -warnings:silent
+	%JAVA% %parameters% %CP% net.sf.saxon.Transform -t -s:export\%%~nf.xml -xsl:"https://raw.githubusercontent.com/YaleArchivesSpace/ASpace-plus-MARC/master/excel/xslt/MarcXML-reorder-and-prep.xsl" -o:export\tmp\%%~nf.xml -warnings:silent
 
 	%JAVA% %parameters% %CP% net.sf.saxon.Transform -t -s:export\%%~nf.xml -xsl:"https://raw.githubusercontent.com/YaleArchivesSpace/ASpace-plus-MARC/master/excel/xslt/Deal-with-ISBD-issues.xsl" -o:export\tmp\%%~nf.xml -warnings:silent
 
 
 	"%marcedit_path%\cmarcedit.exe" -s export\tmp\%%~nf.xml -d export\tmp\%%~nf.mrc -xmlmarc
 
-    )
+ )
 
 echo Generating import file... (please wait)
 
