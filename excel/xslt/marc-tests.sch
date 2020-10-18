@@ -34,6 +34,11 @@
                 This 008 place code is not valid.  For our best practices, it should only contain letters, a space, or a "#".
             </sch:assert>
         </sch:rule>
+        <sch:rule context="marc:subfield[@code=('0', '1')]">
+            <sch:assert test="starts-with(., 'http')">
+                This record has a URI subfield that does NOT start with "http": <sch:value-of select="."/>
+            </sch:assert>
+        </sch:rule>
     </sch:pattern>
 
 </sch:schema>
