@@ -16,7 +16,7 @@ mkdir -p spreadsheets/backup
 
 xmlfiles=(`find ./spreadsheets -maxdepth 1 -name "*.xml"`)
 if [ ${#xmlfiles[@]} -gt 0 ]; then
-  for f in $xmlfiles; do
+  for f in ${xmlfiles[@]}; do
     fne="${f##*/}"
     filename="${fne%.xml}"
     echo $filename

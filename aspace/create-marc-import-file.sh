@@ -18,7 +18,7 @@ echo Post-processing MARCXML files...
 xmlfiles=(`find ./export -maxdepth 1 -name "*.xml"`)
 
 if [ ${#xmlfiles[@]} -gt 0 ]; then
-  for f in $xmlfiles; do
+  for f in ${xmlfiles[@]}; do
     fne="${f##*/}"
     filename="${fne%.xml}"
     echo $filename
@@ -27,18 +27,23 @@ if [ ${#xmlfiles[@]} -gt 0 ]; then
     $JAVA $parameters $CP net.sf.saxon.Transform -t -s:export/tmp/$fne -xsl:"https://raw.githubusercontent.com/YaleArchivesSpace/ASpace-plus-MARC/master/excel/xslt/MarcXML-reorder-and-prep.xsl" -o:export/tmp/$fne -warnings:silent
     $JAVA $parameters $CP net.sf.saxon.Transform -t -s:export/tmp/$fne -xsl:"https://raw.githubusercontent.com/YaleArchivesSpace/ASpace-plus-MARC/master/excel/xslt/Deal-with-ISBD-issues.xsl" -o:export/tmp/$fne.xml -warnings:silent
 
-    $MARCEDIT_PATH/MarcEdit3 -s export/tmp/$fne -d export/tmp/$filename.mrc -xmlmarc
+    $MARCEDIT_PATH/MarcEdit3 -s export/tmp/$fne -d import/$filename.mrc -xmlmarc
 
-    echo "Generating import file... (please wait)"
-
-    mrcfiles=(`find ./export/tmp -maxdepth 1 -name "*.mrc"`)
-    #for f in $mrcfiles; do
-    #	export files=$f
-
-    $MARCEDIT_PATH/MarcEdit3 -s $mrcfiles -d import/$USER-$DateTime.mrc -join
   done
 
-  echo "MARC file created."
+  echo "Generating import file... (please wait)"
+
+  mrcfiles=(`find export/tmp -maxdepth 1 -name "*.mrc"`)
+
+  # MarcEdit requirement is to send the list of files as a semi-colon separated list, so i'd think this should work, but alas it does not.
+  files=$(IFS=\;; echo "${mrcfiles[*]}")
+
+  echo $files
+
+  # Since I cannot get the join option to work with MarcEdit 3, the way it works on Windows, I'm giving up on that for now.... and moving those XML->MRC files over to the import directory instead.
+  # $MARCEDIT_PATH/MarcEdit3 -s $files -d import/$USER-$DateTime.mrc -join
+
+  # echo "MARC file created."
 
   echo "Removing temporary files..."
 
