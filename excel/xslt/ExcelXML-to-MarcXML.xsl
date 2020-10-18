@@ -136,7 +136,7 @@
         <xsl:variable name="Title_500" select="ss:Cell[ss:Data[normalize-space()]][ss:NamedCell/@ss:Name = 'Title_Source_Note_500']"/>
         <xsl:variable name="Language_546" select="ss:Cell[ss:Data[normalize-space()]][ss:NamedCell/@ss:Name = 'Language_of_Materials_546']"/>         
         <xsl:variable name="Language_code_008" select="ss:Cell[ss:Data[normalize-space()]][ss:NamedCell/@ss:Name = 'Language_code_008']"/>
-        <xsl:variable name="provenance_note" select="ss:Cell[ss:Data[normalize-space()]][ss:NamedCell/@ss:Name = 'Provenance_Note_561']"/>
+        <xsl:variable name="provenance_note" select="ss:Cell[ss:Data[normalize-space()]][ss:NamedCell/@ss:Name = 'Provenance_note_561']"/>
         <xsl:variable name="accession_type" select="(ss:Cell[ss:Data[normalize-space()]][ss:NamedCell/@ss:Name = 'Accession_Type_561'], 0)[1]"/>
         <xsl:variable name="source" select="(ss:Cell[ss:Data[normalize-space()]][ss:NamedCell/@ss:Name = 'Source_561'], 0)[1]"/>
         <xsl:variable name="fund" select="(ss:Cell[ss:Data[normalize-space()]][ss:NamedCell/@ss:Name = 'Fund_561'], 0)[1]"/>
