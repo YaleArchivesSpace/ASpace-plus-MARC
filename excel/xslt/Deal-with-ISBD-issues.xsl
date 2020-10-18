@@ -68,7 +68,7 @@ The following fields never end in punctuation: 040, 043, 035, 300, 336, 337, 338
     The following fields have varying punctuation:
     100, 600, 610, 611, 630, 650, 651, 700: Ends with a period, unless it ends with a closing parenthesis (e.g. Griggs (Family)) or a dash (open date e.g. 1821-).
     -->
-    <xsl:template match="marc:datafield[@tag = ('100', '600', '610', '611', '630', '650', '651', '700')]/marc:subfield[last()][not(matches(normalize-space(.), '[-.)]$'))]">
+    <xsl:template match="marc:datafield[@tag = ('100', '600', '610', '611', '630', '650', '651', '700')]/marc:subfield[not(@code=('0','1'))][last()][not(matches(normalize-space(.), '[-.)]$'))]">
         <xsl:param name="rules"/>
         <xsl:copy>
             <xsl:apply-templates select="@*|node()"/>
