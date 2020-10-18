@@ -15,15 +15,15 @@ if not exist spreadsheets\backup mkdir spreadsheets\backup
  for %%f in (spreadsheets\*.xml) do (
             echo %%~nf
 
-	%JAVA% %parameters% %CP% net.sf.saxon.Transform -t -s:spreadsheets\%%~nf.xml -xsl:"xslt\ExcelXML-to-MarcXML.xsl" -o:spreadsheets\tmp\%%~nf.xml -warnings:silent
+	%JAVA% %parameters% %CP% net.sf.saxon.Transform -t -s:spreadsheets\%%~nf.xml -xsl:"https://raw.githubusercontent.com/YaleArchivesSpace/ASpace-plus-MARC/master/excel/xslt/ExcelXML-to-MarcXML.xsl" -o:spreadsheets\tmp\%%~nf.xml -warnings:silent
 
-	%JAVA% %parameters% %CP% net.sf.saxon.Transform -t -s:spreadsheets\tmp\%%~nf.xml -xsl:"xslt\MarcXML-add-6xx.xsl" -o:spreadsheets\tmp\%%~nf.xml -warnings:silent
+	%JAVA% %parameters% %CP% net.sf.saxon.Transform -t -s:spreadsheets\tmp\%%~nf.xml -xsl:"https://raw.githubusercontent.com/YaleArchivesSpace/ASpace-plus-MARC/master/excel/xslt/MarcXML-add-6xx.xsl" -o:spreadsheets\tmp\%%~nf.xml -warnings:silent
 
-	%JAVA% %parameters% %CP% net.sf.saxon.Transform -t -s:spreadsheets\tmp\%%~nf.xml -xsl:"xslt\MarcXML-reorder-and-prep.xsl" -o:spreadsheets\tmp\%%~nf.xml -warnings:silent
+	%JAVA% %parameters% %CP% net.sf.saxon.Transform -t -s:spreadsheets\tmp\%%~nf.xml -xsl:"https://raw.githubusercontent.com/YaleArchivesSpace/ASpace-plus-MARC/master/excel/xslt/MarcXML-reorder-and-prep.xsl" -o:spreadsheets\tmp\%%~nf.xml -warnings:silent
 
-	%JAVA% %parameters% %CP% net.sf.saxon.Transform -t -s:spreadsheets\tmp\%%~nf.xml -xsl:"xslt\Deal-with-ISBD-issues.xsl" -o:spreadsheets\tmp\%%~nf.xml -warnings:silent
+	%JAVA% %parameters% %CP% net.sf.saxon.Transform -t -s:spreadsheets\tmp\%%~nf.xml -xsl:"https://raw.githubusercontent.com/YaleArchivesSpace/ASpace-plus-MARC/master/excel/xslt/Deal-with-ISBD-issues.xsl" -o:spreadsheets\tmp\%%~nf.xml -warnings:silent
 
-	%JAVA% %parameters% %CP% net.sf.saxon.Transform -t -s:xslt\marc-tests.sch -xsl:"..\vendor\schematron\iso_dsdl_include.xsl" -o:schematron\marc-tests-1.sch
+	%JAVA% %parameters% %CP% net.sf.saxon.Transform -t -s:"https://raw.githubusercontent.com/YaleArchivesSpace/ASpace-plus-MARC/master/excel/xslt/marc-tests.sch" -xsl:"..\vendor\schematron\iso_dsdl_include.xsl" -o:schematron\marc-tests-1.sch
 	%JAVA% %parameters% %CP% net.sf.saxon.Transform -t -s:schematron\marc-tests-1.sch -xsl:"..\vendor\schematron\iso_abstract_expand.xsl" -o:schematron\marc-tests-2.sch
 	%JAVA% %parameters% %CP% net.sf.saxon.Transform -t -s:schematron\marc-tests-2.sch -xsl:"..\vendor\schematron\iso_svrl_for_xslt2.xsl" -o:schematron\schematron.xsl
 	%JAVA% %parameters% %CP% net.sf.saxon.Transform -t -s:spreadsheets\tmp\%%~nf.xml -xsl:"schematron\schematron.xsl" -o:reports\%DateTime%_error_report_%%~nf.svrl
