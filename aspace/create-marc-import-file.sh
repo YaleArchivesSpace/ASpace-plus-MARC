@@ -25,7 +25,7 @@ if [ ${#xmlfiles[@]} -gt 0 ]; then
 
     $JAVA $parameters $CP net.sf.saxon.Transform -t -s:$f -xsl:"https://raw.githubusercontent.com/YaleArchivesSpace/ASpace-plus-MARC/master/aspace/xslt/MARCxml-post-processing.xsl" -o:export/tmp/$fne -warnings:silent
     $JAVA $parameters $CP net.sf.saxon.Transform -t -s:export/tmp/$fne -xsl:"https://raw.githubusercontent.com/YaleArchivesSpace/ASpace-plus-MARC/master/excel/xslt/MarcXML-reorder-and-prep.xsl" -o:export/tmp/$fne -warnings:silent
-    $JAVA $parameters $CP net.sf.saxon.Transform -t -s:export/tmp/$fne -xsl:"https://raw.githubusercontent.com/YaleArchivesSpace/ASpace-plus-MARC/master/excel/xslt/Deal-with-ISBD-issues.xsl" -o:export/tmp/$fne.xml -warnings:silent
+    $JAVA $parameters $CP net.sf.saxon.Transform -t -s:export/tmp/$fne -xsl:"https://raw.githubusercontent.com/YaleArchivesSpace/ASpace-plus-MARC/master/excel/xslt/Deal-with-ISBD-issues.xsl" -o:export/tmp/$fne -warnings:silent
 
     $MARCEDIT_PATH/MarcEdit3 -s export/tmp/$fne -d import/$filename.mrc -xmlmarc
 

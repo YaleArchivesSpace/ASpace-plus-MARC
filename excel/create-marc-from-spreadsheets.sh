@@ -24,7 +24,7 @@ if [ ${#xmlfiles[@]} -gt 0 ]; then
     $JAVA $parameters $CP net.sf.saxon.Transform -t -s:$f -xsl:"xslt/ExcelXML-to-MarcXML.xsl" -o:spreadsheets/tmp/$fne -warnings:silent
     $JAVA $parameters $CP net.sf.saxon.Transform -t -s:spreadsheets/tmp/$fne -xsl:"xslt/MarcXML-add-6xx.xsl" -o:spreadsheets/tmp/$fne -warnings:silent
     $JAVA $parameters $CP net.sf.saxon.Transform -t -s:spreadsheets/tmp/$fne -xsl:"xslt/MarcXML-reorder-and-prep.xsl" -o:spreadsheets/tmp/$fne -warnings:silent
-    $JAVA $parameters $CP net.sf.saxon.Transform -t -s:spreadsheets/tmp/$fne -xsl:"xslt/Deal-with-ISBD-issues.xsl" -o:spreadsheets/tmp/$fne.xml -warnings:silent
+    $JAVA $parameters $CP net.sf.saxon.Transform -t -s:spreadsheets/tmp/$fne -xsl:"xslt/Deal-with-ISBD-issues.xsl" -o:spreadsheets/tmp/$fne -warnings:silent
 
     $JAVA $parameters $CP net.sf.saxon.Transform -t -s:xslt/marc-tests.sch -xsl:"../vendor/schematron/iso_dsdl_include.xsl" -o:schematron/marc-tests-1.sch
     $JAVA $parameters $CP net.sf.saxon.Transform -t -s:schematron/marc-tests-1.sch -xsl:"../vendor/schematron/iso_abstract_expand.xsl" -o:schematron/marc-tests-2.sch
