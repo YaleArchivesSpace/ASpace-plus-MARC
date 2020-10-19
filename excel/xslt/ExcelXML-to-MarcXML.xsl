@@ -199,7 +199,7 @@
                 <xsl:with-param name="material_type" select="$material_type"/>
                 <xsl:with-param name="title_statement" select="$title_statement"/>
             </xsl:call-template>
-            <xsl:if test="$rules = ('dcrmmss', 'dcrmg', 'dcrmc')">
+            <xsl:if test="not($rules = 'dacs')">
                 <xsl:call-template name="publication_264">
                     <xsl:with-param name="place" select="$Place_of_Creation_264"/>
                     <xsl:with-param name="date" select="$Date_of_Creation"/>
