@@ -10,7 +10,7 @@
 # https://drive.google.com/open?id=1q4x_EQ8zExqeD4NIEgvS11GuFD_nALvr (slide show from a 2016[?] preso on the matter)
 
 
-# This file is intended to supersede ASpace
+# This file has as a goal to supersede ASpace-plus-MARC/aspace/create-marc-import-file.sh
 
 # from pymarc import MARCReader
 from pymarc import parse_xml_to_array
