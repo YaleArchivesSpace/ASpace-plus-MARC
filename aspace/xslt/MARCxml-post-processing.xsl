@@ -173,4 +173,20 @@
         </xsl:copy>
     </xsl:template>
     
+    <!-- new workaround for default marcxml exports.
+        when an agent is linked as a subject and is further subdivided,
+           we need to remove any subfield 0 values since those are related to the agent only
+           not the full heading.
+           
+    e.g.       
+    <datafield ind1="0" ind2="0" tag="600"> 
+        <subfield code="a">H. D.</subfield>  
+        <subfield code="q">(Hilda Doolittle),</subfield> 
+        <subfield code="d">1886-1961.</subfield> 
+        <subfield code="0">http://id.loc.gov/authorities/names/n78095822</subfield> 
+        <subfield code="v">Portraits</subfield>  
+    </datafield>
+    -->
+    <xsl:template match="marc:subfield[@code eq '0'][following-sibling::marc:subfield[matches(@code, '[a-z]')]]"/>
+
 </xsl:stylesheet>
